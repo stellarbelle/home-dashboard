@@ -4,6 +4,11 @@ import { GraphQLClient, gql } from 'graphql-request';
 const apiUrl = process.env.API_URL ?? ""
 const client = new GraphQLClient(apiUrl + '/graphql')
 
+
+interface Query {
+  ping: string
+}
+
 function App() {
   const [result, setResult] = useState("")
 
@@ -13,8 +18,10 @@ function App() {
           ping
       }`
 
-      const data = await client.request(query)
-      console.log(data)
+      const data: Query = await client.request(query)
+      console.log(data.ping)
+
+      setResult(data.ping)
     }
 
     fetchData()
@@ -22,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      Hello, world! server says {result}
+      The server says {result}
     </div>
   );
 }
