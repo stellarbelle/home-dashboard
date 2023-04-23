@@ -1,0 +1,27 @@
+type Appointment {
+    allDay: Boolean!
+    start: String!
+    end: String!
+}
+
+type Calendar {
+    appointments: [Appointment!]
+}
+
+type Task {
+    title: String!
+}
+
+type TaskList {
+    tasks: [Task!]
+}
+
+type RootQuery {
+    calendar: Calendar!
+    ping: String!
+    tasks: TaskList!
+}
+
+schema {
+    query: RootQuery
+}
