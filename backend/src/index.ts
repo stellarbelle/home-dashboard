@@ -1,20 +1,12 @@
 import express from "express"
-import fs from "fs"
-import { buildSchema } from 'graphql';
+import cors from "cors"
 import { createHandler } from 'graphql-http/lib/use/express';
+import { rootValue, schema } from './schema';
 
 const app = express();
 const port = 8080; // default port to listen
 
 // fix the path later
-const rawSchema = fs.readFileSync(__dirname + "/../src/schema.graphql").toString();
-const schema = buildSchema(rawSchema)
-const rootValue = {
-  ping: () => {
-    return "Pong!!"
-  }
-}
-
 app.get("/", (req, res) => {
   res.send('Hello, world!')
 })
@@ -24,6 +16,7 @@ app.get( "/status", ( req, res ) => {
 
 app.all(
   "/graphql",
+  cors(),
   createHandler({ schema, rootValue }),
 )
 
