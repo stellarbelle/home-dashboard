@@ -1,0 +1,1 @@
+This project contains two folders: backend and frontend. Each contains a node project with a 'dev' entrypoint. Launch each with 'npm install && npm run dev', and that should get you a functioning server.
